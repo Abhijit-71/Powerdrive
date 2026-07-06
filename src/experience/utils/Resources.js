@@ -6,6 +6,7 @@ import EventEmitter from "./EventEmitter.js"
 export default class Resources extends EventEmitter {
     constructor(sources) {
         super()
+        console.log("from res")
 
         this.sources = sources
 
@@ -36,6 +37,7 @@ export default class Resources extends EventEmitter {
         // Load each item
         for (const source of this.sources) {
             if (source.type === 'gltfModel') {
+                console.log(source.type,source.path,source.name)
                 this.loaders.gltfLoader.load(
                     source.path,
                     (gltf) => {
@@ -54,7 +56,8 @@ export default class Resources extends EventEmitter {
     }
 
     sourceLoaded(source, file){
-        this.items[source.name] = file
+        this.items[source.name] = file.scene
+        console.log("loaded")
 
         this.loaded++
 

@@ -1,8 +1,29 @@
 import './style.css'
-import Experience from "./experience/experience"
+import Game from "./experience/game"
+import Resources from './experience/utils/Resources'
+import { RapierPhysics } from 'three/examples/jsm/Addons.js'
+
+const src = [
+            {
+                name: "car",
+                type: "gltfModel",
+                path: "/src/assets/sizuka.glb"
+            },
+
+        ]
+        
 
 
+const physics = await RapierPhysics();
 
-const experience = new Experience(document.querySelector('canvas.game'));
+const res = new Resources(src);
+
+res.on("ready", () => {
+
+    const game = new Game(document.getElementById("game"),res,physics);
+
+});
+
+
 
 
