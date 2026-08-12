@@ -3,7 +3,7 @@ import * as THREE from "three";
 export default class Environment {
   constructor() {
     const loader = new THREE.TextureLoader();
-    const texture = loader.load("/public/assets/blank.png");
+    const texture = loader.load("/assets/blank.png");
     texture.colorSpace = THREE.SRGBColorSpace;
     const geometry = new THREE.BoxGeometry(100, 100, 0.1);
     const material = new THREE.MeshPhongMaterial({ map: texture });
