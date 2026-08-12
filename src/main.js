@@ -7,7 +7,7 @@ const src = [
             {
                 name: "car",
                 type: "gltfModel",
-                path: "/src/assets/sizuka.glb"
+                path: "/public/assets/sizuka.glb"
             },
 
         ]

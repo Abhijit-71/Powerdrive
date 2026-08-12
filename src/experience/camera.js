@@ -16,10 +16,38 @@ export class Camera extends THREE.PerspectiveCamera {
         
         
         this.game = game;
-        this.setOrbitControls();
-        //this.setPointerlControls();
-        
+        //this.setOrbitControls();
+        this.setPointerlControls();
+        this.currentPosition = new THREE.Vector3();
+        this.currentLookat = new THREE.Vector3();
     }
+    
+    calcIdealOffset(target){
+      const idealOffset = new THREE.Vector3(4,4,0.7);
+      idealOffset.applyQuaternion(target.quaternion);
+      idealOffset.add(target.position);
+      return idealOffset; 
+    }
+
+    calcIdealLookat(target){
+      const idealLookat = new THREE.Vector3(-1.5,0,0.6);
+      idealLookat.applyQuaternion(target.quaternion);
+      idealLookat.add(target.position);
+      return idealLookat; 
+    }
+
+    followUpdate(target){
+      if (!target) return;
+      const idealOffset = this.calcIdealOffset(target);
+      const idealLookat = this.calcIdealLookat(target);
+
+      this.currentPosition.lerp(idealOffset,0.03);
+      this.currentLookat.lerp(idealLookat,0.03);
+
+      this.position.copy(this.currentPosition);
+      this.lookAt(this.currentLookat);
+
+    }  
     
 
     setPointerlControls(){
