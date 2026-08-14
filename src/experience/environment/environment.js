@@ -3,9 +3,12 @@ import * as THREE from "three";
 export default class Environment {
   constructor() {
     const loader = new THREE.TextureLoader();
-    const texture = loader.load("/assets/blank.png");
+    const texture = loader.load("/assets/stylizedGrass.png");
     texture.colorSpace = THREE.SRGBColorSpace;
-    const geometry = new THREE.BoxGeometry(100, 100, 0.1);
+    texture.wrapS = THREE.MirroredRepeatWrapping;
+    texture.wrapT = THREE.MirroredRepeatWrapping;
+    texture.repeat.set(120,130);
+    const geometry = new THREE.BoxGeometry(1000, 1000, 0.1);
     const material = new THREE.MeshPhongMaterial({ map: texture });
     this.floor = new THREE.Mesh(geometry, material);
     //this.floor.castShadow = true;

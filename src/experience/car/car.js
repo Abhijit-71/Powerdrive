@@ -12,7 +12,7 @@ export class Car {
     this.mesh = mesh;
     this.physics = physics;
 
-    this.physics.addMesh(mesh, 10, 0.8); // addMesh places the RigidBody in the mesh.userData.physics object
+    this.physics.addMesh(mesh, 20, 0.6); // addMesh places the RigidBody in the mesh.userData.physics object
     this.chassis = mesh.userData.physics.body;
 
     this.vehicleController = this.physics.world.createVehicleController(
@@ -111,7 +111,7 @@ export class Car {
     );
 
     // Set suspension stiffness for wheel
-    this.vehicleController.setWheelSuspensionStiffness(index, 24.0);
+    this.vehicleController.setWheelSuspensionStiffness(index, 36.0);
 
     // Set wheel friction
     this.vehicleController.setWheelFrictionSlip(index, 1000.0);
@@ -222,6 +222,8 @@ export class Car {
 
     const engineForce = accelerateForce;
 
+    this.vehicleController.setWheelEngineForce(0, engineForce);
+    this.vehicleController.setWheelEngineForce(1, engineForce);
     this.vehicleController.setWheelEngineForce(2, engineForce);
     this.vehicleController.setWheelEngineForce(3, engineForce);
 
